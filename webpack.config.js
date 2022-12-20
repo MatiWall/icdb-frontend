@@ -8,6 +8,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, "./static/frontend"),
     filename: "[name].js",
+    publicPath: "/",
   },
   module: {
     rules: [
@@ -16,12 +17,19 @@ module.exports = {
         exclude: /node_modules/,
         use: {
           loader: "babel-loader",
-        },
+        }, 
       },
+      {
+        test: /\.css$/i,
+        use: ['css-loader',]
+    }
     ],
   },
   optimization: {
     minimize: true,
+  },
+  devServer: {
+    historyApiFallback: true,
   },
   plugins: [
     new HtmlWebpackPlugin({

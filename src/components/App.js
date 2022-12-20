@@ -1,17 +1,27 @@
 import React, {Component} from "react";
 import {render} from "react-dom";
+import { Outlet, Link } from "react-router-dom";
+
 import {
     BrowserRouter as Router,
     Routes,
-    Route,
-    Redirect
+    Route
 } from "react-router-dom";
 
 import HomePage from "./HomePage";
 import MyGarage from "./MyGarage";
 import CreateGarage from "./CreateGarage";
+import LoginPage from "./Login"
+import SignUpPage from "./SignUp"
+import ActivatePasswordPage from "./ActivateAccount"
+import ResetPasswordPage from "./ResetPassword"
+import ResetPasswordConfirmPage from "./ResetPasswordConfirmPage"
+
+
 
 import Navbar from "./NavigationBar";
+
+import '../../static/css/index.css'
 
 export default class App extends Component {
     constructor(props){
@@ -20,16 +30,23 @@ export default class App extends Component {
 
     render(){
         return (
-        <div>
+        <>
+            
             <Navbar/>
-            <Router>
+            <div className="container" style={{"height": "100%"}}>
+            
                 <Routes>
-                    <Route exact path="/" element={<p> This is the home page </p>}/>
+                    <Route exact path="/" element={<HomePage/>}/>
                     <Route exact path="/mygarage" element={<MyGarage/>}/>
                     <Route exact path="/creategarage" element={<CreateGarage/>}/>
+                    <Route exact path="/login" element={<LoginPage/>}/>
+                    <Route exact path="/signup" element={<SignUpPage/>}/>
+                    <Route exact path="/reset_password" element={<ResetPasswordPage/>}/>
+                    <Route exact path="/password/activate/:uid/:token" element={<ActivatePasswordPage/>}/>
+                    <Route exact path="/password/reset/confirm/:uid/:token" element={<ResetPasswordConfirmPage/>}/>
                  </Routes>
-            </Router>
-        </div>
+            </div>
+        </>
         );
     }
 };
@@ -37,4 +54,8 @@ export default class App extends Component {
 
 const appDiv = document.getElementById("app")
 
-render(<App/>, appDiv);
+render((
+<Router>
+<App/>
+</Router>
+), appDiv);
