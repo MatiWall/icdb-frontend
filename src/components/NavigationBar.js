@@ -8,6 +8,8 @@ import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 import {Link} from 'react-router-dom';
 
+import LogOut from './LogOut';
+
 const Navbar = () => {
     return (
         <Box   sx={{ display: 'flex' }}>
@@ -30,6 +32,7 @@ const Navbar = () => {
                             <Tabs>
                                 <Tab label="Login" component={Link} to="/login" />
                                 <Tab label="Sign Up" component={Link} to="/signup" />
+                                <LogOut></LogOut>
                             </Tabs>
                         </Box>
                     </Grid>

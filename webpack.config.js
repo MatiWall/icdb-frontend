@@ -1,6 +1,9 @@
 const path = require("path");
 const webpack = require("webpack");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const dotenv = require('dotenv').config( {
+  path: path.join(__dirname, '.env')
+} );
 
 console.log(__dirname);
 module.exports = {
@@ -34,6 +37,7 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: path.join(__dirname, "./templates/frontend/index.html"),
-    })
+    }),
+    new webpack.EnvironmentPlugin(Object.keys(dotenv.parsed || {})),
     ],
 };

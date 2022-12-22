@@ -1,12 +1,13 @@
 import React, {Component} from "react";
 import {render} from "react-dom";
-import { Outlet, Link } from "react-router-dom";
 
 import {
     BrowserRouter as Router,
     Routes,
     Route
 } from "react-router-dom";
+
+import {Provider} from 'react-redux';
 
 import HomePage from "./HomePage";
 import MyGarage from "./MyGarage";
@@ -17,11 +18,12 @@ import ActivatePasswordPage from "./ActivateAccount"
 import ResetPasswordPage from "./ResetPassword"
 import ResetPasswordConfirmPage from "./ResetPasswordConfirmPage"
 
-
-
 import Navbar from "./NavigationBar";
 
 import '../../static/css/index.css'
+
+import store from "../store";
+
 
 export default class App extends Component {
     constructor(props){
@@ -42,7 +44,7 @@ export default class App extends Component {
                     <Route exact path="/login" element={<LoginPage/>}/>
                     <Route exact path="/signup" element={<SignUpPage/>}/>
                     <Route exact path="/reset_password" element={<ResetPasswordPage/>}/>
-                    <Route exact path="/password/activate/:uid/:token" element={<ActivatePasswordPage/>}/>
+                    <Route exact path="/activate/:uid/:token" element={<ActivatePasswordPage/>}/>
                     <Route exact path="/password/reset/confirm/:uid/:token" element={<ResetPasswordConfirmPage/>}/>
                  </Routes>
             </div>
@@ -55,7 +57,9 @@ export default class App extends Component {
 const appDiv = document.getElementById("app")
 
 render((
-<Router>
-<App/>
-</Router>
+<Provider store={store}>
+    <Router>
+        <App/>
+    </Router>
+</Provider>
 ), appDiv);
