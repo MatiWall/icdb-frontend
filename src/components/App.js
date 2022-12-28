@@ -14,6 +14,7 @@ import MyGarage from "./MyGarage";
 import CreateGarage from "./CreateGarage";
 import LoginPage from "./Login"
 import SignUpPage from "./SignUp"
+import Settings from "./Settings";
 import ActivatePasswordPage from "./ActivateAccount"
 import ResetPasswordPage from "./ResetPassword"
 import ResetPasswordConfirmPage from "./ResetPasswordConfirmPage"
@@ -39,6 +40,7 @@ export default class App extends Component {
             
                 <Routes>
                     <Route exact path="/" element={<HomePage/>}/>
+                    <Route exact path="/settings" element={<Settings/>}/>
                     <Route exact path="/mygarage" element={<MyGarage/>}/>
                     <Route exact path="/creategarage" element={<CreateGarage/>}/>
                     <Route exact path="/login" element={<LoginPage/>}/>

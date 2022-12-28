@@ -1,16 +1,20 @@
 import React from 'react';
-
+import { connect, useStore} from 'react-redux';
 import Grid from "@mui/material/Grid";
 import AppBar from "@mui/material/AppBar";
 import ToolBar from "@mui/material/ToolBar";
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
+import SettingsIcon from '@mui/icons-material/Settings';
 import {Link} from 'react-router-dom';
 
 import LogOut from './LogOut';
+import { ContentCutOutlined } from '@mui/icons-material';
 
-const Navbar = () => {
+const Navbar = (props) => {
+    console.log('Checking authenticated');
+    console.log(props);
     return (
         <Box   sx={{ display: 'flex' }}>
         <AppBar position="static">
@@ -30,9 +34,10 @@ const Navbar = () => {
                             
         
                             <Tabs>
-                                <Tab label="Login" component={Link} to="/login" />
-                                <Tab label="Sign Up" component={Link} to="/signup" />
-                                <LogOut></LogOut>
+                                {props.isAuthenticated ? <LogOut></LogOut> : <div><Tab label="Login" component={Link} to="/login" />
+                                <Tab label="Sign Up" component={Link} to="/signup" /></div> }
+                                
+                                <Tab icon={<SettingsIcon />} component={Link} to="/settings"></Tab>
                             </Tabs>
                         </Box>
                     </Grid>
@@ -43,7 +48,13 @@ const Navbar = () => {
     );
 };
 
+const mapStateToProps = (state) => {
+    return {
+        isAuthenticated: state.auth.isAuthenticated
+    }
+};
 
-export default Navbar
+
+export default connect(mapStateToProps)(Navbar)
 
 
